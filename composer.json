@@ -1,0 +1,17 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "author's name",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "slim/slim": "3.5.0",
+    "slim/pdo": "1.10.0",
+    "fzaninotto/faker": "v1.6.0"
+  }
+}
