@@ -2,17 +2,18 @@
 
 {% block content %}
 
-    <h1>Список пользователей</h1>
-    <div class="row">
+    <h1>Список заказов</h1>
+    <p class="row">
 
     {% for row in data %}
-        <div class="data">
-        <h2>Логин: {{ row.login }}</h2>
+        <p>
+        <h2>Ваш логин: {{ row.login }}</h2>
         <p>Электронная почта:<br> <a href="mailto:{{ row.email }}">{{ row.email }}</a></p>
         <p>Имя: {{ row.name }}</p>
         <p>Возраст: {{ row.age }}</p>
+        <p>О себе: {{ row.about }}</p>
         <p>Аватар: <img src="{{ row.avatar }}"></p>
-        </div>
+        </p>
     {% endfor %}
-    </div>
+
 {% endblock %}
