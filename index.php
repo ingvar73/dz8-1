@@ -1,39 +1,61 @@
 <?php
 require_once 'config.php';
+session_start();
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-$app = new \Slim\App;
+$app = new \Slim\App([
+    'settings' => [
+        'displayErrorDetails' => true,
+    ]
+]);
+
+// Get container
+$container = $app->getContainer();
+
+// Register component on container
+$container['view'] = function ($container) {
+    $view = new \Slim\Views\Twig(__DIR__.'/assets/templates', [
+        'cache' => false
+    ]);
+    $view->addExtension(new \Slim\Views\TwigExtension(
+        $container['router'],
+        $container['request']->getUri()
+    ));
+
+    return $view;
+};
 
 //$app->config('debug', true);
 $pdo = new \Slim\PDO\Database($dsn, $usr, $pwd);
 
 $app->get('/', function ($req, $resp, $options){
-    $resp->write('Hello from GET');
+    return $this->view->render($resp, 'layout.twig', ['title' => 'Главная страница']);
+//    $resp->write('Hello from GET');
 });
 
 //$app->get('/users', function ($req, $resp, $options){
 //    $resp->write('Hello from Users');
 //});
 
-$app->get('/user', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
+$app->get('/user', function (ServerRequestInterface $req, ResponseInterface $resp, $data) use ($pdo){
     $selectStatement = $pdo->select()->from('users');
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
-    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-
+    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp, 'user_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
 });
 
-$app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
+$app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface $resp, $data) use ($pdo){
     $user_id = $req->getAttribute('id');
 
     $selectStatement = $pdo->select()->from('users')->where('id', '=', $user_id);
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
-    echo $user_id;
-    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp, 'user_view.twig', ['title' => 'Список -пользователей', 'data' => json_decode($data, true)]);
 });
 
 $app->get('/order', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -65,11 +87,14 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
                     ->values(array($data['login'], $data['name']));
             break;
         case 'delete':
-
+            $statement = $pdo->delete()
+                ->from('users')
+                ->where('id', '=', $data['id']);
             break;
     }
 
     $stmt = $statement->execute();
+
     if ($stmt){
         $success = true;
     } else{
@@ -81,4 +106,13 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
 
 });
 
+
+$app->get('/hello/{name}', function (ServerRequestInterface $req, ResponseInterface $resp, $args) {
+    return $this->view->render($resp, 'profile.twig', [
+        'name' => $args['name'],
+        'title' => 'Страница приветствия!'
+    ]);
+})->setName('profile');
+
 $app->run();
+

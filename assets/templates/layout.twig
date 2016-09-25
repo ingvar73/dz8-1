@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+
+</head>
+<body>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+<div class="container">
+    <hr>
+
+    <footer>
+        <p>© 2016 LoftSchool</p>
+    </footer>
+</div> <!-- /container -->
+
+
+{#<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>#}
+<script src="/assets/js/bootstrap.min.js"></script>
+</body>
+</html>
