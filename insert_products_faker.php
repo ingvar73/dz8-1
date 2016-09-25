@@ -6,7 +6,7 @@ $faker = Faker\Factory::create('ru_RU');
 
 for ($i = 0; $i < 30; $i++){
     $insertStatement = $pdo->insert(array('id'))
-        ->into('users')
+        ->into('products')
         ->columns(array('description', 'details', 'price'))
         ->values(array('',
             $faker->realText(100),
