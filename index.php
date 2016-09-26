@@ -44,7 +44,7 @@ $app->get('/user', function (ServerRequestInterface $req, ResponseInterface $res
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'users_view.twig', ['title' => 'Список -пользователей', 'data' => json_decode($data)]);
+    return $this->view->render($resp, 'users_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
 });
 
 $app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface $resp, $data) use ($pdo){
@@ -55,7 +55,7 @@ $app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'user_view.twig', ['title' => 'Список -пользователей', 'data' => json_decode($data)]);
+    return $this->view->render($resp, 'user_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
 });
 
 $app->get('/order', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -64,7 +64,7 @@ $app->get('/order', function (ServerRequestInterface $req, ResponseInterface $re
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => json_decode($data, true)]);
+    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
 });
 
 $app->get('/order/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -75,7 +75,7 @@ $app->get('/order/{id}', function (ServerRequestInterface $req, ResponseInterfac
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => json_decode($data, true)]);
+    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
 });
 
 $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -84,9 +84,17 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
 
     switch ($action){
         case 'create':
-                $statement = $pdo->insert(array('login', 'name'))
+                $statement = $pdo->insert(array('login', 'name', 'email', 'age', 'about', 'avatar', 'password'))
                     ->into('users')
-                    ->values(array($data['login'], $data['name']));
+                    ->values(array(
+                        $data['login'],
+                        $data['name'],
+                        $data['email'],
+                        $data['age'],
+                        $data['about'],
+                        $data['avatar'],
+                        $data['password']
+                    ));
             break;
         case 'delete':
             $statement = $pdo->delete()
@@ -107,7 +115,7 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
 //    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'insert_delete.twig', ['title' => 'Добавление / Удаление пользователей', 'data' => json_decode($data, true)]);
+    return $this->view->render($resp, 'user_view.twig', ['title' => 'Добавление / Удаление пользователей']);
 });
 
 

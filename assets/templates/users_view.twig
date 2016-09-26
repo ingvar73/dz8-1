@@ -15,4 +15,20 @@
         </div>
     {% endfor %}
     </div>
+
+    <h2>Вставка записи в таблицу Users</h2>
+    <div>
+        <form id="myForm" action="/user" method="post" enctype="multipart/form-data">
+            <input type="text" name="login" id="login" placeholder="Логин" class="login" id="login" />
+            <input type="text" name="name" id="name" placeholder="Имя" class="name" id="name" />
+            <input type="email" name="email" id="email" placeholder="Email" class="email" id="email" />
+            <input type="text" name="age" id="age" placeholder="Возраст" class="age" id="age" />
+            <textarea rows="5" cols="50" name="about" id="about" placeholder="О себе" class="about" id="about"></textarea>
+            <input type="file" name="avatar" id="avatar" />
+            <input type="password" name="password" id="password" placeholder="Пароль" class="password" id="password" />
+            <input type="submit" value="Запрос" class="btn_create" name="btn_create">
+        </form>
+    </div>
+
+    <div id="data"></div>
 {% endblock %}
