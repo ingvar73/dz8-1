@@ -3,17 +3,9 @@
 {% block content %}
 
     <h1>Список пользователей</h1>
-    <div class="row">
-
-    {% for row in data %}
-        <div class="data">
-        <h2>Логин: {{ row.login }}</h2>
-        <p>Электронная почта:<br> <a href="mailto:{{ row.email }}">{{ row.email }}</a></p>
-        <p>Имя: {{ row.name }}</p>
-        <p>Возраст: {{ row.age }}</p>
-        <p>Аватар: <img src="{{ row.avatar }}"></p>
+    <div id='jqxWidget'>
+        <div id="jqxgrid">
         </div>
-    {% endfor %}
     </div>
 
     <h2>Вставка записи в таблицу Users</h2>
@@ -24,9 +16,18 @@
             <input type="email" name="email" id="email" placeholder="Email" class="email" id="email" />
             <input type="text" name="age" id="age" placeholder="Возраст" class="age" id="age" />
             <textarea rows="5" cols="50" name="about" id="about" placeholder="О себе" class="about" id="about"></textarea>
-            <input type="file" name="avatar" id="avatar" />
+            {#<input type="file" name="avatar" id="avatar" />#}
             <input type="password" name="password" id="password" placeholder="Пароль" class="password" id="password" />
-            <input type="submit" value="Запрос" class="btn_create" name="btn_create">
+            <input type="hidden" name="action" value="create" />
+            <input type="submit" value="Insert" class="btn_create" name="btn_create">
+        </form>
+    </div>
+    <h2>Удаление записи по Id</h2>
+    <div>
+        <form id="myForm1" action="/user" method="post">
+            <input type="text" id="id" name="id" placeholder="Введите ID пользователя" />
+            <input type="hidden" name="action" value="delete" id="action">
+            <input type="submit" value="Delete" class="btn_delete" name="btn_delete">
         </form>
     </div>
 

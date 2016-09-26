@@ -84,7 +84,7 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
 
     switch ($action){
         case 'create':
-                $statement = $pdo->insert(array('login', 'name', 'email', 'age', 'about', 'avatar', 'password'))
+                $statement = $pdo->insert(array('login', 'name', 'email', 'age', 'about', 'password'))
                     ->into('users')
                     ->values(array(
                         $data['login'],
@@ -92,7 +92,6 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
                         $data['email'],
                         $data['age'],
                         $data['about'],
-                        $data['avatar'],
                         $data['password']
                     ));
             break;
@@ -115,16 +114,8 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
 //    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'user_view.twig', ['title' => 'Добавление / Удаление пользователей']);
+    return $this->view->render($resp, 'users_view.twig', ['title' => 'Добавление / Удаление пользователей'], $data);
 });
-
-
-$app->get('/hello/{name}', function (ServerRequestInterface $req, ResponseInterface $resp, $args) {
-    return $this->view->render($resp, 'profile.twig', [
-        'name' => $args['name'],
-        'title' => 'Страница приветствия!'
-    ]);
-})->setName('profile');
 
 $app->run();
 

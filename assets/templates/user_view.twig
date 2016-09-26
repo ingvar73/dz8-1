@@ -23,9 +23,19 @@
             <input type="email" name="email" id="email" placeholder="Email" class="email" id="email" />
             <input type="text" name="age" id="age" placeholder="Возраст" class="age" id="age" />
             <textarea type="text" rows="5" cols="50" name="about" id="about" placeholder="О себе" class="about" id="about"></textarea>
-            <input type="file" name="avatar" id="avatar" />
+            {#<input type="file" name="avatar" id="avatar" />#}
             <input type="password" name="password" id="password" placeholder="Пароль" class="password" id="password" />
+            <input type="hidden" name="action" value="create" />
             <input type="button" value="Запрос" class="btn_create" name="btn_create">
+        </form>
+    </div>
+
+    <h2>Удаление записи по Id</h2>
+    <div>
+        <form id="myForm1" action="/user" method="post">
+            <input type="text" id="id" name="id" placeholder="Введите ID пользователя" />
+            <input type="hidden" name="action" value="delete" id="action">
+            <input type="submit" value="Delete" class="btn_delete" name="btn_delete">
         </form>
     </div>
 
