@@ -38,7 +38,7 @@ $app->get('/', function ($req, $resp, $options){
 //    $resp->write('Hello from Users');
 //});
 
-$app->get('/user', function (ServerRequestInterface $req, ResponseInterface $resp, $data) use ($pdo){
+$app->get('/user', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
     $selectStatement = $pdo->select()->from('users');
 
     $stmt = $selectStatement->execute();
@@ -47,7 +47,7 @@ $app->get('/user', function (ServerRequestInterface $req, ResponseInterface $res
     return $this->view->render($resp, 'users_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
 });
 
-$app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface $resp, $data) use ($pdo){
+$app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
     $user_id = $req->getAttribute('id');
 
     $selectStatement = $pdo->select()->from('users')->where('id', '=', $user_id);
@@ -56,26 +56,6 @@ $app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface
     $data = $stmt->fetch();
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
     return $this->view->render($resp, 'user_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
-});
-
-$app->get('/order', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
-    $selectStatement = $pdo->select()->from('orders')->leftJoin('users', 'orders.customer_id', '=', 'users.id');
-
-    $stmt = $selectStatement->execute();
-    $data = $stmt->fetchAll();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
-});
-
-$app->get('/order/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
-    $order_id = $req->getAttribute('id');
-
-    $selectStatement = $pdo->select()->from('orders')->leftJoin('users', 'orders.customer_id', '=', 'users.id')->where('orders.id', '=', $order_id);
-
-    $stmt = $selectStatement->execute();
-    $data = $stmt->fetch();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
 });
 
 $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -114,7 +94,47 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
 //    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'users_view.twig', ['title' => 'Добавление / Удаление пользователей'], $data);
+    return $this->view->render($resp, 'users_view.twig', ['title' => 'Добавление / Удаление пользователей', 'data' => $data]);
+});
+
+$app->get('/order', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
+    $selectStatement = $pdo->select()->from('orders')->leftJoin('users', 'orders.customer_id', '=', 'users.id');
+
+    $stmt = $selectStatement->execute();
+    $data = $stmt->fetchAll();
+    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
+});
+
+$app->get('/order/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
+    $order_id = $req->getAttribute('id');
+
+    $selectStatement = $pdo->select()->from('orders')->leftJoin('users', 'orders.customer_id', '=', 'users.id')->where('orders.id', '=', $order_id);
+
+    $stmt = $selectStatement->execute();
+    $data = $stmt->fetch();
+    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
+});
+
+$app->get('/product', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
+    $selectStatement = $pdo->select()->from('orders')->leftJoin('products', 'orders.product_id', '=', 'products.id');
+
+    $stmt = $selectStatement->execute();
+    $data = $stmt->fetchAll();
+    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp, 'product_view.twig', ['title' => 'Список товаров', 'data' => $data]);
+});
+
+$app->get('/product/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
+    $order_id = $req->getAttribute('id');
+
+    $selectStatement = $pdo->select()->from('orders')->leftJoin('products', 'orders.product_id', '=', 'products.id')->where('orders.id', '=', $order_id);
+
+    $stmt = $selectStatement->execute();
+    $data = $stmt->fetch();
+    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp, 'product_view.twig', ['title' => 'Один товар', 'data' => $data]);
 });
 
 $app->run();

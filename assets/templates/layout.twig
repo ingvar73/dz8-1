@@ -27,9 +27,33 @@
     </style>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#myButton").jqxButton({ width: '120px', height: '35px', theme: 'darkblue'});
-        });
+
+        var data =
+        {
+            datatype: "json",
+            datafields: [
+                { login: 'login'},
+                { name: 'name'},
+                { email: 'email'},
+                { age: 'age'},
+                { about: 'about'}
+            ],
+            id: 'id',
+            url: "/user"
+        };
+
+        $("#jqxgrid").jqxGrid(
+                {
+                    source: data,
+                    theme: 'classic',
+                    columns: [
+                        { text: 'Name', datafield: 'name', width: 250},
+                        { text: 'Beverage Type', datafield: 'type', width: 250 },
+                        { text: 'Calories', datafield: 'calories', width: 180 },
+                        { text: 'Total Fat', datafield: 'totalfat', width: 120 },
+                        { text: 'Protein', datafield: 'protein', width: 120 }
+                    ]
+                });
     </script>
 
 </head>
