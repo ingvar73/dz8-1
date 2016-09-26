@@ -1,7 +1,7 @@
 <?php
 require "config.php";
 $pdo = new \Slim\PDO\Database($dsn, $usr, $pwd);
-$faker = Faker\Factory::create('ru_RU');
+$faker = Faker\Factory::create();
 //$dir = 'image/';
 
 for ($i = 0; $i < 30; $i++){

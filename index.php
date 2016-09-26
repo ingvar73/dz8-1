@@ -104,8 +104,10 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
     }
 
     $data = array('success' => $success);
-    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+//    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 
+    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp, 'insert_delete.twig', ['title' => 'Добавление / Удаление пользователей', 'data' => json_decode($data, true)]);
 });
 
 
