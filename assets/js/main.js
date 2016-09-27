@@ -29,8 +29,8 @@
  *
  **/
 
-$(document).ready(function () {
-
+$(document).ready(function (e) {
+    e.preventDefault();
    $("#myForm").ajaxForm(
        {
           dataType: 'json',
@@ -47,6 +47,8 @@ $(document).ready(function () {
    );
 
 });
+
+
 
 // $.each(data, function (i, v) {
 //    $('#'+i).val(v);
