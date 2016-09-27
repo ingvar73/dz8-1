@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+header('Content-Type: application/json');
 session_start();
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -43,8 +44,7 @@ $app->get('/user', function (ServerRequestInterface $req, ResponseInterface $res
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'users_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
+    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -54,8 +54,7 @@ $app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'user_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
+    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 });
 
 $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -93,8 +92,7 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
     $data = array('success' => $success);
 //    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'users_view.twig', ['title' => 'Добавление / Удаление пользователей', 'data' => $data]);
+    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/order', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -102,8 +100,7 @@ $app->get('/order', function (ServerRequestInterface $req, ResponseInterface $re
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
+    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/order/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -113,8 +110,7 @@ $app->get('/order/{id}', function (ServerRequestInterface $req, ResponseInterfac
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
+    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/product', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -122,8 +118,7 @@ $app->get('/product', function (ServerRequestInterface $req, ResponseInterface $
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'product_view.twig', ['title' => 'Список товаров', 'data' => $data]);
+    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/product/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -133,8 +128,7 @@ $app->get('/product/{id}', function (ServerRequestInterface $req, ResponseInterf
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'product_view.twig', ['title' => 'Один товар', 'data' => $data]);
+    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 });
 
 $app->run();
