@@ -26,35 +26,6 @@
         }
     </style>
 
-    {#<script type="text/javascript">#}
-
-        {#var data =#}
-        {#{#}
-            {#datatype: "json",#}
-            {#datafields: [#}
-                {#{ login: 'login'},#}
-                {#{ name: 'name'},#}
-                {#{ email: 'email'},#}
-                {#{ age: 'age'},#}
-                {#{ about: 'about'}#}
-            {#],#}
-            {#id: 'id',#}
-            {#url: "/user"#}
-        {#};#}
-
-        {#$("#jqxgrid").jqxGrid(#}
-                {#{#}
-                    {#source: data,#}
-                    {#theme: 'classic',#}
-                    {#columns: [#}
-                        {#{ text: 'Name', datafield: 'name', width: 250},#}
-                        {#{ text: 'Beverage Type', datafield: 'type', width: 250 },#}
-                        {#{ text: 'Calories', datafield: 'calories', width: 180 },#}
-                        {#{ text: 'Total Fat', datafield: 'totalfat', width: 120 },#}
-                        {#{ text: 'Protein', datafield: 'protein', width: 120 }#}
-                    {#]#}
-                {#});#}
-    {#</script>#}
 
 </head>
 <body>
@@ -69,16 +40,48 @@
         <li>
             <a href="/order">Список заказов</a>
         </li>
+        <li>
+            <a href="/product">Список товаров</a>
+        </li>
 
     </ul>
 </div>
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        {% block content %}
-        {% endblock %}
+
+        <h1>Список пользователей</h1>
+        <div id="jqxgrid"></div>
+
+        <h2>Вставка записи в таблицу Users</h2>
+        <div>
+            <form id="myForm" action="/user" method="post" enctype="multipart/form-data">
+                <input type="text" name="login" id="login" placeholder="Логин" class="login" />
+                <input type="text" name="name" id="name" placeholder="Имя" class="name" />
+                <input type="email" name="email" id="email" placeholder="Email" class="email" />
+                <input type="text" name="age" id="age" placeholder="Возраст" class="age" />
+                <textarea rows="5" cols="50" name="about" id="about" placeholder="О себе" class="about"></textarea>
+                {#<input type="file" name="avatar" id="avatar" />#}
+                <input type="password" name="password" id="password" placeholder="Пароль" class="password" />
+                <input type="hidden" name="action" value="create" />
+                <input type="submit" value="Insert" class="btn_create" name="btn_create">
+            </form>
+        </div>
+        <h2>Удаление записи по Id</h2>
+        <div>
+            <form id="myForm1" action="/user" method="post">
+                <input type="text" id="id" name="id" placeholder="Введите ID пользователя" />
+                <input type="hidden" name="action" value="delete" id="action">
+                <input type="submit" value="Delete" class="btn_delete" name="btn_delete">
+            </form>
+        </div>
+
+        <div id="data"></div>
+
     </div>
 </div>
+
+
 
 <div class="container">
     <hr>
@@ -87,9 +90,6 @@
         <p>© 2016 LoftSchool</p>
     </footer>
 </div> <!-- /container -->
-
-
-{#<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>#}
 <script src="/assets/js/bootstrap.min.js"></script>
 </body>
 </html>
