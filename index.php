@@ -43,8 +43,7 @@ $app->get('/user', function (ServerRequestInterface $req, ResponseInterface $res
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'users_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
+    return $this->view->render($resp->withJson($data)->withHeader('Content-Type', 'text/html; charset=utf-8'), 'view.html', ['title' => 'Список -пользователей']);
 });
 
 $app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -54,8 +53,7 @@ $app->get('/user/{id}', function (ServerRequestInterface $req, ResponseInterface
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'user_view.twig', ['title' => 'Список -пользователей', 'data' => $data]);
+    return $this->view->render($resp->withJson($data)->withHeader('Content-Type', 'application/json'), 'view.html', ['title' => 'Список -пользователей']);
 });
 
 $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -93,8 +91,8 @@ $app->post('/user', function (ServerRequestInterface $req, ResponseInterface $re
     $data = array('success' => $success);
 //    return $resp->withJson($data)->withHeader('Content-Type', 'application/json');
 
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'users_view.twig', ['title' => 'Добавление / Удаление пользователей', 'data' => $data]);
+
+    return $this->view->render($resp->withJson($data)->withHeader('Content-Type', 'application/json'), 'view.html', ['title' => 'Добавление / Удаление пользователей', 'data' => $data]);
 });
 
 $app->get('/order', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -103,7 +101,7 @@ $app->get('/order', function (ServerRequestInterface $req, ResponseInterface $re
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
+    return $this->view->render($resp, 'view.html', ['title' => 'Список -заказов', 'data' => $data]);
 });
 
 $app->get('/order/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -114,7 +112,7 @@ $app->get('/order/{id}', function (ServerRequestInterface $req, ResponseInterfac
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
     $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'order_view.twig', ['title' => 'Список -заказов', 'data' => $data]);
+    return $this->view->render($resp, 'view.html', ['title' => 'Список -заказов', 'data' => $data]);
 });
 
 $app->get('/product', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -122,8 +120,8 @@ $app->get('/product', function (ServerRequestInterface $req, ResponseInterface $
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetchAll();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'product_view.twig', ['title' => 'Список товаров', 'data' => $data]);
+    $resp_data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp_data, 'view.html', ['title' => 'Список товаров', 'data' => $data]);
 });
 
 $app->get('/product/{id}', function (ServerRequestInterface $req, ResponseInterface $resp) use ($pdo){
@@ -133,8 +131,8 @@ $app->get('/product/{id}', function (ServerRequestInterface $req, ResponseInterf
 
     $stmt = $selectStatement->execute();
     $data = $stmt->fetch();
-    $data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
-    return $this->view->render($resp, 'product_view.twig', ['title' => 'Один товар', 'data' => $data]);
+    $resp_data = $resp->withJson($data)->withHeader('Content-Type', 'application/json');
+    return $this->view->render($resp_data, 'view.html', ['title' => 'Один товар', 'data' => $data]);
 });
 
 $app->run();
