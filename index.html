@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
     <script src="/assets/js/jquery.form.min.js"></script>
-    <!--<script type="text/javascript" src="/assets/js/main.js"></script>-->
     <style type="text/css">
         input, textarea {
             display: block;
@@ -19,7 +18,7 @@
 $(document).ready(function () {
     $("#show_data_user").click(function () {
         $("#users").html('Список Пользователей');
-        $.get('/user', function (data) {
+        $.get('/users', function (data) {
             $.each(data, function (key, value) {
                 $("#show_list_user").append("ID\# "
                         +value.id+"-> "
@@ -34,7 +33,7 @@ $(document).ready(function () {
     });
 //вывод данных таблицы orders
     $("#show_data_order").click(function () {
-        $.get('/order', function (data) {
+        $.get('/orders', function (data) {
             $("#orders").html('Список Заказов');
             $.each(data, function (key, value) {
                 $("#show_list_order").append("<li>"+"ID\# "
@@ -50,7 +49,7 @@ $(document).ready(function () {
     });
 //вывод данных таблицы products
     $("#show_data_products").click(function () {
-        $.get('/product', function (data) {
+        $.get('/products', function (data) {
             $("#products").html('Список Товаров');
             $.each(data, function (key, value) {
                 $("#show_list_products").append("ID\# "
@@ -68,7 +67,7 @@ $(document).ready(function () {
     });
 });
 </script>
-
+    <script type="text/javascript" src="/assets/js/main.js"></script>
 </head>
 <body>
 <div class="header">
@@ -97,12 +96,12 @@ $(document).ready(function () {
 
         <h2>Вставка записи в таблицу Users</h2>
         <div>
-            <form id="myForm" action="/user" method="post" enctype="multipart/form-data">
+            <form id="myForm" action="" method="post" enctype="multipart/form-data">
                 <label>Выберите таблицу</label>
-                <select id="sel_tab_ins" name="tables_ins">
-                    <option value="s1" selected>Users</option>
-                    <option value="s2">Orders</option>
-                    <option value="s3">Products</option>
+                <select id="sel_tab_del" name="tables_del">
+                    <option value="users" selected>Users</option>
+                    <option value="orders">Orders</option>
+                    <option value="products">Products</option>
                 </select><br>
                 <input type="text" name="login" id="login" placeholder="Логин" class="login" />
                 <input type="text" name="name" id="name" placeholder="Имя" class="name" />
@@ -116,12 +115,12 @@ $(document).ready(function () {
         </div>
         <h2>Удаление записи по Id</h2>
         <div>
-            <form id="myForm1" action="/user" method="post">
+            <form id="myForm1" name="myForm1" action="/users" method="post">
                 <label>Выберите таблицу</label>
                 <select id="sel_tab_del" name="tables_del">
                     <option value="users" selected>Users</option>
                     <option value="orders">Orders</option>
-                    <option value="prod">Products</option>
+                    <option value="products">Products</option>
                 </select><br>
                 <input type="text" id="id" name="id" placeholder="Введите ID пользователя" />
                 <input type="hidden" name="action" value="delete" id="action">
