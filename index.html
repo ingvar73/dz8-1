@@ -21,7 +21,14 @@ $(document).ready(function () {
         $("#users").html('Список Пользователей');
         $.get('/user', function (data) {
             $.each(data, function (key, value) {
-                $("#show_list").append("ID\# "+value.id+"- "+value.login+", "+value.name+", "+value.email+", "+value.age+", "+value.about+", "+value.avatar+"<br>");
+                $("#show_list_user").append("ID\# "
+                        +value.id+"-> "
+                        +value.login+", "
+                        +value.name+", "
+                        +value.email+", "
+                        +value.age+", "
+                        +value.about+", "
+                        +value.avatar+"<br>");
             })
         });
     });
@@ -30,7 +37,32 @@ $(document).ready(function () {
         $.get('/order', function (data) {
             $("#orders").html('Список Заказов');
             $.each(data, function (key, value) {
-                $("#show_list_order").append("ID\# "+value.id+"- "+value.product_id+", "+value.qty+", "+value.amount+", "+value.name+", "+value.email+", "+value.url+"<br>");
+                $("#show_list_order").append("ID\# "
+                        +value.id+"-> "
+                        +value.product_id+", "
+                        +value.qty+", "
+                        +value.amount+", "
+                        +value.name+", "
+                        +value.email+", "
+                        +value.url+"<br>");
+            })
+        });
+    });
+//вывод данных таблицы products
+    $("#show_data_products").click(function () {
+        $.get('/product', function (data) {
+            $("#products").html('Список Товаров');
+            $.each(data, function (key, value) {
+                $("#show_list_products").append("ID\# "
+                        +value.id+"-> "
+                        +value.date+", "
+                        +value.product_id+", "
+                        +value.qty+", "
+                        +value.amount+", "
+                        +value.customer_id+", "
+                        +value.description+", "
+                        +value.details+", "
+                        +value.price+"<br>");
             })
         });
     });
@@ -43,16 +75,21 @@ $(document).ready(function () {
     <ul>
         <h1 id="users"></h1>
         <a id="show_data_user" style="cursor: pointer">Show User Table</a>
-        <div id="show_list_order"></div>
+        <div id="show_list_user"></div>
 
     </ul>
     <ul>
         <h1 id="orders"></h1>
         <a id="show_data_order" style="cursor: pointer">Show Orders Table</a>
-        <div id="show_list"></div>
+        <div id="show_list_order"></div>
 
     </ul>
+    <ul>
+        <h1 id="products"></h1>
+        <a id="show_data_products" style="cursor: pointer">Show Orders Table</a>
+        <div id="show_list_products"></div>
 
+    </ul>
 </div>
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
