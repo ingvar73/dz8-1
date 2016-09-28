@@ -99,7 +99,7 @@ $(document).ready(function () {
         <div>
             <form id="myForm" action="/user" method="post" enctype="multipart/form-data">
                 <label>Выберите таблицу</label>
-                <select name="tables_ins">
+                <select id="sel_tab_ins" name="tables_ins">
                     <option value="s1" selected>Users</option>
                     <option value="s2">Orders</option>
                     <option value="s3">Products</option>
@@ -118,7 +118,7 @@ $(document).ready(function () {
         <div>
             <form id="myForm1" action="/user" method="post">
                 <label>Выберите таблицу</label>
-                <select name="tables_del">
+                <select id="sel_tab_del" name="tables_del">
                     <option value="users" selected>Users</option>
                     <option value="orders">Orders</option>
                     <option value="prod">Products</option>
