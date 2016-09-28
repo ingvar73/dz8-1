@@ -2,17 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8"/>
-    <title>{{ title }}</title>
-
-    <link rel="stylesheet" href="/assets/css/jqx.base.css" type="text/css" />
-    <link rel="stylesheet" href="/assets/css/jqx.classic.css" type="text/css" />
-    {#<script type="text/javascript" src="/assets/js/jquery-1.7.1.min.js"></script>#}
-    <script type="text/javascript" src="/assets/js/jqxcore.js"></script>
-    <script type="text/javascript" src="/assets/js/jqxbuttons.js"></script>
-    <script type="text/javascript" src="/assets/js/jqxscrollbar.js"></script>
-    <script type="text/javascript" src="/assets/js/jqxmenu.js"></script>
-    <script type="text/javascript" src="/assets/js/jqxgrid.js"></script>
-    <script type="text/javascript" src="/assets/js/jqxdata.js"></script>
+    <title>REST API</title>
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
@@ -25,14 +15,24 @@
             margin-bottom: 5px;
         }
     </style>
+<script type="application/javascript">
+$(document).ready(function () {
+    $("#show_data").click(function () {
+//        $("#show_list").append("Hello");
+        $.get('/user', function (data) {
 
+            $("#show_list").append(data);
+        });
+    });
+});
+</script>
 
 </head>
 <body>
 <div class="header">
     <ul>
         <li>
-            <a href="/">На главную</a>
+            <a href="/index.html">На главную</a>
         </li>
         <li>
             <a href="/user">Список пользователей</a>
@@ -51,7 +51,8 @@
     <div class="container">
 
         <h1>Список пользователей</h1>
-        <div id="jqxgrid"></div>
+        <a id="show_data" style="cursor: pointer">Show</a>
+        <div id="show_list"></div>
 
         <h2>Вставка записи в таблицу Users</h2>
         <div>

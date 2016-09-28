@@ -79,9 +79,7 @@ $('#'+i).val(v);
 //
 // });
 
-$(function () {
-   $.(".btn_delete").click(function (e) {
-       e.preventDefault();
+$.(".btn_delete").click(function () {
       var id = $("#id").val();
       var action = $("#action").val();
          $.ajax({
@@ -95,8 +93,7 @@ $(function () {
                 console.log(data);
             },
             error: function (data) {
-                console.log(data);
-            }
+                console.log(data)
+            };
          });
-   })
-});
+   });
