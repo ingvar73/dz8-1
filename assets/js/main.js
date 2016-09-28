@@ -1,33 +1,8 @@
-/**
- * Created by ingvar73 on 15.09.2016.
- */
-// $(function () {
-//    $.(".btn_create").click(function () {
-//       var login = $("#login").val();
-//       var name = $("#name").val();
-//       var email = $("#email").val();
-//       var age = $("#age").val();
-//       var about = $("#about").val();
-//       var avatar = $("#avatar").val();
-//       var password = $("#password").val();
-//
-//          $.ajax({
-//             url: 'http://dz8.rest/user',
-//             type: 'POST',
-//             dataType: 'json',
-//             data: {login: login, name: name, email: email, age: age, about: about, avatar: avatar, password: password, action: create},
-//             success: function(data)
-//             {
-//                $("#data").html(data);
-//             }
-//          });
-//    })
-// });
-
-/**
- * Второй вариант с использованием jquery.form
- *
- **/
+// удаление по id
+function select_table () {
+    var form = document.querySelector("form");
+    console.log(form.elements[1].type);
+}
 
 $(document).ready(function (e) {
     e.preventDefault();
