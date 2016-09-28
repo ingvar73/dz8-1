@@ -17,11 +17,21 @@
     </style>
 <script type="application/javascript">
 $(document).ready(function () {
-    $("#show_data").click(function () {
-//        $("#show_list").append("Hello");
+    $("#show_data_user").click(function () {
+        $("#users").html('Список Пользователей');
         $.get('/user', function (data) {
-
-            $("#show_list").append(data);
+            $.each(data, function (key, value) {
+                $("#show_list").append("ID\# "+value.id+"- "+value.login+", "+value.name+", "+value.email+", "+value.age+", "+value.about+", "+value.avatar+"<br>");
+            })
+        });
+    });
+//вывод данных таблицы orders
+    $("#show_data_order").click(function () {
+        $.get('/order', function (data) {
+            $("#orders").html('Список Заказов');
+            $.each(data, function (key, value) {
+                $("#show_list_order").append("ID\# "+value.id+"- "+value.product_id+", "+value.qty+", "+value.amount+", "+value.name+", "+value.email+", "+value.url+"<br>");
+            })
         });
     });
 });
@@ -31,28 +41,22 @@ $(document).ready(function () {
 <body>
 <div class="header">
     <ul>
-        <li>
-            <a href="/index.html">На главную</a>
-        </li>
-        <li>
-            <a href="/user">Список пользователей</a>
-        </li>
-        <li>
-            <a href="/order">Список заказов</a>
-        </li>
-        <li>
-            <a href="/product">Список товаров</a>
-        </li>
+        <h1 id="users"></h1>
+        <a id="show_data_user" style="cursor: pointer">Show User Table</a>
+        <div id="show_list_order"></div>
 
     </ul>
+    <ul>
+        <h1 id="orders"></h1>
+        <a id="show_data_order" style="cursor: pointer">Show Orders Table</a>
+        <div id="show_list"></div>
+
+    </ul>
+
 </div>
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-
-        <h1>Список пользователей</h1>
-        <a id="show_data" style="cursor: pointer">Show</a>
-        <div id="show_list"></div>
 
         <h2>Вставка записи в таблицу Users</h2>
         <div>
