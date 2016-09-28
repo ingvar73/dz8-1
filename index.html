@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="/assets/css/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/jqx.classic.css" type="text/css" />
+    {#<script type="text/javascript" src="/assets/js/jquery-1.7.1.min.js"></script>#}
+    <script type="text/javascript" src="/assets/js/jqxcore.js"></script>
+    <script type="text/javascript" src="/assets/js/jqxbuttons.js"></script>
+    <script type="text/javascript" src="/assets/js/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="/assets/js/jqxmenu.js"></script>
+    <script type="text/javascript" src="/assets/js/jqxgrid.js"></script>
+    <script type="text/javascript" src="/assets/js/jqxdata.js"></script>
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <style type="text/css">
+        input, textarea {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="header">
+    <ul>
+        <li>
+            <a href="/">На главную</a>
+        </li>
+        <li>
+            <a href="/user">Список пользователей</a>
+        </li>
+        <li>
+            <a href="/order">Список заказов</a>
+        </li>
+        <li>
+            <a href="/product">Список товаров</a>
+        </li>
+
+    </ul>
+</div>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+
+        <h1>Список пользователей</h1>
+        <div id="jqxgrid"></div>
+
+        <h2>Вставка записи в таблицу Users</h2>
+        <div>
+            <form id="myForm" action="/user" method="post" enctype="multipart/form-data">
+                <input type="text" name="login" id="login" placeholder="Логин" class="login" />
+                <input type="text" name="name" id="name" placeholder="Имя" class="name" />
+                <input type="email" name="email" id="email" placeholder="Email" class="email" />
+                <input type="text" name="age" id="age" placeholder="Возраст" class="age" />
+                <textarea rows="5" cols="50" name="about" id="about" placeholder="О себе" class="about"></textarea>
+                <input type="password" name="password" id="password" placeholder="Пароль" class="password" />
+                <input type="hidden" name="action" value="create" />
+                <input type="submit" value="Insert" class="btn_create" name="btn_create">
+            </form>
+        </div>
+        <h2>Удаление записи по Id</h2>
+        <div>
+            <form id="myForm1" action="/user" method="post">
+                <input type="text" id="id" name="id" placeholder="Введите ID пользователя" />
+                <input type="hidden" name="action" value="delete" id="action">
+                <input type="submit" value="Delete" class="btn_delete" name="btn_delete">
+            </form>
+        </div>
+
+        <div id="data"></div>
+
+    </div>
+</div>
+
+
+
+<div class="container">
+    <hr>
+
+    <footer>
+        <p>© 2016 LoftSchool</p>
+    </footer>
+</div> <!-- /container -->
+<script src="/assets/js/bootstrap.min.js"></script>
+</body>
+</html>
