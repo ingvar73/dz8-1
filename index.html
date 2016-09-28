@@ -37,14 +37,14 @@ $(document).ready(function () {
         $.get('/order', function (data) {
             $("#orders").html('Список Заказов');
             $.each(data, function (key, value) {
-                $("#show_list_order").append("ID\# "
+                $("#show_list_order").append("<li>"+"ID\# "
                         +value.id+"-> "
                         +value.product_id+", "
                         +value.qty+", "
                         +value.amount+", "
                         +value.name+", "
                         +value.email+", "
-                        +value.url+"<br>");
+                        +value.url+"</li>");
             })
         });
     });

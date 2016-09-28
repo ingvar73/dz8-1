@@ -50,35 +50,6 @@ $(document).ready(function (e) {
 
 
 
-// $.each(data, function (i, v) {
-//    $('#'+i).val(v);
-// });
-
-/***
- *
- * $.each(data, function(i, v){
-$('#'+i).val(v);
-};
- */
-
-
-// $(document).ready(function () {
-//
-//     $("#myForm1").ajaxForm(
-//         {
-//             dataType: 'json',
-//             data: {id: id, action: delete},
-//             success: function (data) {
-//
-//                 $.each(data, function (i, v) {
-//                     $('#'+i).val(v);
-//                 });
-//             }
-//         }
-//     );
-//
-// });
-
 $.(".btn_delete").click(function () {
       var id = $("#id").val();
       var action = $("#action").val();
