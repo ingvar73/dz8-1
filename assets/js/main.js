@@ -1,10 +1,6 @@
 // удаление по id
-function select_table_del () {
-    $('#sel_tab_del').change(function () {
-        var selectedOption = $('#sel_tab_del option:selected');
-        return selectedOption;
-    });
-}
+
+
 
 // function setNewAction(selectOption)
 // {
@@ -23,8 +19,10 @@ $(document).ready(function () {
         alert ("В функции");
         var id = $("#id").val();
         var action = $("#action").val();
-
-        switch (select_table_del()){
+        var select = $('#sel_tab_del').on('change', function () {
+            var selectedOption = $('#sel_tab_del option:selected');
+        });
+        switch (select){
             case 'users':{
                 $("#myForm1").attr('action', '/users');
                 $.ajax({
