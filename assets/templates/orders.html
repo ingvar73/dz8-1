@@ -1,0 +1,20 @@
+<h2>Вставка записи в таблицу Orders</h2>
+<div>
+    <form id="myForm" action="/orders" method="post" enctype="multipart/form-data">
+        <input type="date" name="date" id="date" placeholder="Номер заказа" class="date" />
+        <input type="text" name="product_id" id="product_id" placeholder="Номер заказа" class="product_id" />
+        <input type="text" name="qty" id="qty" placeholder="Количество товара" class="qty" />
+        <input type="text" name="amount" id="amount" placeholder="Сумма" class="amount" />
+        <input type="text" name="customer_id" id="customer_id" placeholder="Имя заказчика" class="customer_id" />
+        <input type="hidden" name="action" value="create" />
+        <input type="submit" value="Insert" class="btn_create" name="btn_create">
+    </form>
+</div>
+<h2>Удаление записи по Id</h2>
+<div>
+    <form id="myForm1" class="myForm1" action="/orders" method="post">
+        <input type="text" id="id" name="id" placeholder="Введите ID" />
+        <input type="hidden" name="action" value="delete" id="action">
+        <input type="submit" value="Delete" id="btn_delete" name="btn_delete">
+    </form>
+</div>

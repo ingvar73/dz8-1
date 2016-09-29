@@ -65,11 +65,28 @@ $(document).ready(function () {
             })
         });
     });
-
-    // обработка формы
-
-
 });
+    // обработка формы
+    $(document).ready(function () {
+        $('#sel_table').on('change', function () {
+            var selectedOption = $('#sel_table option:selected').val();
+            $("#show_tables").html(selectedOption);
+            switch (selectedOption){
+                case 'users': {
+                    $(".form-group-sm").load("/assets/templates/users.html");
+                }
+                break;
+                case 'orders': {
+                    $(".form-group-sm").load("/assets/templates/orders.html");
+                }
+                break;
+                case 'products': {
+                    $(".form-group-sm").load("/assets/templates/products.html");
+                }
+                    break;
+            }
+        });
+    });
 </script>
     <script type="text/javascript" src="/assets/js/main.js"></script>
 </head>
@@ -97,44 +114,23 @@ $(document).ready(function () {
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-
-        <h2>Вставка записи в таблицу Users</h2>
-        <div>
-            <form id="myForm" action="" method="post" enctype="multipart/form-data">
-                <label>Выберите таблицу</label>
-                <select id="sel_tab_del" name="tables_del">
-                    <option value="users" selected>Users</option>
-                    <option value="orders">Orders</option>
-                    <option value="products">Products</option>
-                </select><br>
-                <input type="text" name="login" id="login" placeholder="Логин" class="login" />
-                <input type="text" name="name" id="name" placeholder="Имя" class="name" />
-                <input type="email" name="email" id="email" placeholder="Email" class="email" />
-                <input type="text" name="age" id="age" placeholder="Возраст" class="age" />
-                <textarea rows="5" cols="50" name="about" id="about" placeholder="О себе" class="about"></textarea>
-                <input type="password" name="password" id="password" placeholder="Пароль" class="password" />
-                <input type="hidden" name="action" value="create" />
-                <input type="submit" value="Insert" class="btn_create" name="btn_create">
-            </form>
-        </div>
-        <h2>Удаление записи по Id</h2>
-        <div>
-            <form id="myForm1" class="myForm1" method="post">
-                <label>Выберите таблицу</label>
-                <select id="sel_tab_del" name="tables_del">
-                    <option value="users" selected>Users</option>
-                    <option value="orders">Orders</option>
-                    <option value="products">Products</option>
-                </select><br>
-                <input type="text" id="id" name="id" placeholder="Введите ID" />
-                <input type="hidden" name="action" value="delete" id="action">
-                <input type="submit" value="Delete" id="btn_delete" name="btn_delete">
-            </form>
-        </div>
-
+        <label>Выберите таблицу</label>
+        <select id="sel_table" name="sel_tables">
+            <option value="-" selected>-</option>
+            <option value="users">Users</option>
+            <option value="orders">Orders</option>
+            <option value="products">Products</option>
+        </select><br>
+        <div id="show_tables"></div>
+    </div>
+    <div class="container">
         <div id="data"></div>
+    </div>
+
+    <div class="form-group-sm">
 
     </div>
+
 </div>
 
 

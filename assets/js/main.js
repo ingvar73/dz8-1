@@ -1,5 +1,6 @@
 // удаление по id
-
+var select = $('#sel_tab_del').on('change', function () {
+    var selectedOption = $('#sel_tab_del option:selected');
 
 
 // function setNewAction(selectOption)

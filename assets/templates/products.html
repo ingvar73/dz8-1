@@ -1,0 +1,18 @@
+<h2>Вставка записи в таблицу Products</h2>
+<div>
+    <form id="myForm" action="/products" method="post" enctype="multipart/form-data">
+        <input type="text" name="description" id="description" placeholder="Логин" class="description" />
+        <input type="text" name="detail" id="detail" placeholder="Имя" class="detail" />
+        <input type="text" name="price" id="price" placeholder="Email" class="price" />
+        <input type="hidden" name="action" value="create" />
+        <input type="submit" value="Insert" class="btn_create" name="btn_create">
+    </form>
+</div>
+<h2>Удаление записи по Id</h2>
+<div>
+    <form id="myForm1" class="myForm1" action="/products" method="post">
+        <input type="text" id="id" name="id" placeholder="Введите ID" />
+        <input type="hidden" name="action" value="delete" id="action">
+        <input type="submit" value="Delete" id="btn_delete" name="btn_delete">
+    </form>
+</div>
