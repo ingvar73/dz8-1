@@ -115,7 +115,7 @@ $(document).ready(function () {
         </div>
         <h2>Удаление записи по Id</h2>
         <div>
-            <form id="myForm1" name="myForm1" action="/users" method="post">
+            <form id="myForm1" class="myForm1" method="post">
                 <label>Выберите таблицу</label>
                 <select id="sel_tab_del" name="tables_del">
                     <option value="users" selected>Users</option>
@@ -124,7 +124,7 @@ $(document).ready(function () {
                 </select><br>
                 <input type="text" id="id" name="id" placeholder="Введите ID пользователя" />
                 <input type="hidden" name="action" value="delete" id="action">
-                <input type="submit" value="Delete" class="btn_delete" name="btn_delete">
+                <input type="submit" value="Delete" id="btn_delete" name="btn_delete">
             </form>
         </div>
 
